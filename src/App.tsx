@@ -1,8 +1,7 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage"
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
-
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -12,10 +11,9 @@ const router = createBrowserRouter([
   { path: "/share/:hash", element: <Dashboard /> },
 ]);
 
-
 function App() {
   return (
-    <div className="text-red-500 bg-amber-300">
+    <div className="bg-zinc-950 dark:bg-zinc-300">
       <RouterProvider router={router}/>
     </div>
   )
