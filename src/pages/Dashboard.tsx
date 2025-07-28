@@ -24,8 +24,14 @@ const Dashboard: React.FC = () => {
     setLoading(true);
     try {
       const response = await api.getContent();
-      // API may return { content: [...] }
-      setContents(response.content || []);
+      // Map _id to id, link to url, and normalize type
+      const normalized = (response.content || []).map((item: any) => ({
+        ...item,
+        id: item._id,
+        url: item.url || item.link,
+        type: item.type === "link" ? "Url" : item.type,
+      }));
+      setContents(normalized);
     } catch (error) {
       // Optionally show error
     } finally {
@@ -43,7 +49,14 @@ const Dashboard: React.FC = () => {
       setFilteredContents(null);
       return;
     }
-    setFilteredContents(results.relevantContent);
+    // Map _id to id, link to url, and normalize type for search results as well
+    const normalized = results.relevantContent.map((item: any) => ({
+      ...item,
+      id: item._id,
+      url: item.url || item.link,
+      type: item.type === "link" ? "Url" : item.type,
+    }));
+    setFilteredContents(normalized);
   };
 
   // Handle delete
