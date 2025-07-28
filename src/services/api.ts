@@ -78,7 +78,7 @@ export const api = {
 
   addContent: async (content: { link?: string; title?: string; content?: string }) => {
     try {
-      const response = await apiClient.post('/content', content);
+      const response = await apiClient.post('/content', content, );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
